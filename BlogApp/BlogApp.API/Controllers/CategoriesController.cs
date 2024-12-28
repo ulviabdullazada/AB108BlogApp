@@ -1,4 +1,5 @@
 ﻿using BlogApp.BL.DTOs.CategoryDtos;
+using BlogApp.BL.Helpers;
 using BlogApp.BL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,16 @@ namespace BlogApp.API.Controllers
     public class CategoriesController(ICategoryService _service) : ControllerBase
     {
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Byte(string value)
+        {
+            return Ok(HashHelper.HashPasword(value));
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Verify(string value, string hash)
+        {
+            return Ok(HashHelper.VerifyPassword(value, hash));
+        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {

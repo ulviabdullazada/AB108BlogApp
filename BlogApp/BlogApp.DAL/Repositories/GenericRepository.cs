@@ -23,8 +23,9 @@ namespace BlogApp.DAL.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            T? entity = await GetByIdAsync(id);
-            Delete(entity!);
+            await Table.Where(x=> x.Id == id).ExecuteDeleteAsync();
+            //T? entity = await GetByIdAsync(id);
+            //Delete(entity!);
         }
 
         public IQueryable<T> GetAll()
